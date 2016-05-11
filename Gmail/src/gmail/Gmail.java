@@ -4,8 +4,10 @@
  * and open the template in the editor.
  */
 package gmail;
+//2607:f8b0:4003:c14::6c
 
 import java.util.Properties;
+
 import javax.mail.Message;
 import javax.mail.MessagingException;
 import javax.mail.PasswordAuthentication;
@@ -14,28 +16,26 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
-/**
- *
- * @author lelguea
- */
 public class Gmail {
-public static void main(String[] args) {
-    
-        System.setProperty("java.net.preferIPv6Stack" , "true");
 
-		final String username = "lelguea@up.edu.mx";
-		
-                // TLS
-                /*
+	public static void main(String[] args) {
+
+		final String username = "0161478@up.edu.mx";
+		final String password = "AnilloFlor4";
+
+                
 		Properties props = new Properties();
+                
+                //Configuration with TLS 
+                /*
 		props.put("mail.smtp.auth", "true");
 		props.put("mail.smtp.starttls.enable", "true");
-		props.put("mail.smtp.host", "2607:f8b0:4003:c14::6c");
-		props.put("mail.smtp.port", "587");
-                */
+		props.put("mail.smtp.host", "smtp.gmail.com");
+		props.put("mail.smtp.port", "587");*/
                 
-                Properties props = new Properties();
-		props.put("mail.smtp.host", "2607:f8b0:4003:c14::6c");
+                
+		//Configuration with SSL
+		props.put("mail.smtp.host", "smtp.gmail.com");
 		props.put("mail.smtp.socketFactory.port", "465");
 		props.put("mail.smtp.socketFactory.class",
 				"javax.net.ssl.SSLSocketFactory");
@@ -52,12 +52,12 @@ public static void main(String[] args) {
 		try {
 
 			Message message = new MimeMessage(session);
-			message.setFrom(new InternetAddress(username));
+			message.setFrom(new InternetAddress("from-email@gmail.com"));
 			message.setRecipients(Message.RecipientType.TO,
-				InternetAddress.parse("lor@up.mx"));
-			message.setSubject("Prueba 3 Texto Plano SSL");
-			message.setText("Dear Lor, Have a nice Day");
-                        message.setContent("<h1>hola</h1>, <b>saludos</b><br>Bye", "text/html; charset=utf-8");
+				InternetAddress.parse("0161478@gmail.com"));
+			message.setSubject("Testing Subject");
+			message.setText("Dear Mail Crawler,"
+				+ "\n\n No spam to my email, please!");
 
 			Transport.send(message);
 
